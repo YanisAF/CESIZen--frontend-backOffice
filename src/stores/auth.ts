@@ -26,14 +26,6 @@ export const useAuthStore = defineStore('auth', {
   getters: {
     isAuthenticated: (state): boolean => !!state.token,
 
-    currentRole: (state): Role | null => {
-      if (!state.token) return null
-      const p = decodePayload(state.token)
-      // Spring Security met le rôle dans "role" ou "authorities"
-      const raw = (p.role ?? p.authorities?.[0] ?? null) as string | null
-      return raw as Role | null
-    },
-
     isAdmin(): boolean {
       return this.currentRole === 'ROLE_ADMIN'
     },
@@ -42,7 +34,7 @@ export const useAuthStore = defineStore('auth', {
       return this.currentRole === 'ROLE_USER'
     },
 
-    // ⚠️ Le JWT Spring ne contient PAS d'userId — sub = username/email, role = liste
+    // Le JWT Spring ne contient PAS d'userId — sub = username/email, role = liste
     // L'ID est résolu côté ProfileView via la liste des utilisateurs
     currentUserId: (_state): number | null => null,
 
@@ -60,7 +52,7 @@ export const useAuthStore = defineStore('auth', {
       return (p.sub ?? '') as string
     },
 
-    // role est stocké en liste dans le JWT : ["ROLE_ADMIN"] ou ["ROLE_USER"]
+    // role est stocké en liste dans le JWT : ["ROLE_ADMIN"]
     currentRole: (state): Role | null => {
       if (!state.token) return null
       const p = decodePayload(state.token)
