@@ -1,0 +1,17 @@
+services:
+  frontend:
+    build: .
+    container_name: cesizen-front-backoffice
+    ports:
+      - "5173:5173" 
+    volumes:
+      - .:/app       
+      - /app/node_modules
+    environment:
+      - NODE_ENV=development
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    external: true
