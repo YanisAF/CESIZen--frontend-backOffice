@@ -19,17 +19,17 @@
 
       <!-- Blocs de contenu (ContentPageDto: name, description, itemUrl) -->
       <div class="article-body mt-2">
-        <div v-if="!pagesStore.selectedPage.content?.length" class="text-muted">
-          Cette page ne contient pas encore de contenu.
-        </div>
-        <div v-for="(block, i) in pagesStore.selectedPage.content" :key="i" class="content-block">
-          <h3 v-if="block.name" class="block-name">{{ block.name }}</h3>
-          <p v-if="block.description" class="block-desc">{{ block.description }}</p>
-          <a v-if="block.itemUrl" :href="block.itemUrl" target="_blank" rel="noopener" class="block-link">
-            🔗 {{ block.itemUrl }}
-          </a>
-        </div>
-      </div>
+  <div v-if="!pagesStore.selectedPage.content?.length" class="text-muted">
+    Cette page ne contient pas encore de contenu.
+  </div>
+  <div v-for="(block, i) in pagesStore.selectedPage.content" :key="i" class="content-block">
+    <h3 v-if="block.name" class="block-name">{{ block.name }}</h3>
+    <p v-if="block.description" class="block-desc">{{ block.description }}</p>
+    <p v-if="block.itemUrl" class="block-link">
+      {{ block.itemUrl }}
+    </p>
+  </div>
+</div>
 
       <!-- Bouton éditer si admin -->
       <div class="mt-3" v-if="authStore.isAdmin">
@@ -66,10 +66,7 @@ export default defineComponent({
 .hero-img   { width:100%; height:100%; object-fit:cover; }
 .article-header h1.article-title { font-family:var(--font-display); font-size:2rem; font-weight:700; line-height:1.2; }
 .article-body { display:flex; flex-direction:column; gap:2rem; }
-.content-block { }
-.block-name  { font-family:var(--font-display); font-size:1.25rem; font-weight:600; margin-bottom:.4rem; }
+.block-name  { font-family:var(--font-display); font-size:1.25rem; font-weight:600; margin-bottom:.4rem; color:var(--c-accent-2); }
 .block-desc  { line-height:1.8; color:var(--c-text); white-space:pre-wrap; }
-.block-link  { display:inline-block; margin-top:.4rem; color:var(--c-accent-2); font-size:.875rem; word-break:break-all; }
-.block-link:hover { text-decoration:underline; }
 .mt-1 { margin-top:.35rem; }
 </style>
