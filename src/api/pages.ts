@@ -41,6 +41,6 @@ export const pagesApi = {
 
   // GET /api/v1/categories (public)
   getCategories() {
-    return apiClient.get<CategoryResponse[]>('/categories')
+    return apiClient.get<CategoryResponse[]>('/categories/list')
   }
 }
